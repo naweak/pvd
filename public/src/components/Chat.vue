@@ -109,7 +109,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   #chat {
     padding: 10px;
     margin: 15px;
@@ -131,5 +131,8 @@
   .text, .autograph {
     margin-top: 5px;
     margin-bottom: 5px;
+  }
+  .text p img {
+    max-width: 700px;
   }
 </style>
