@@ -38,6 +38,26 @@
   import trigande from './assets/img/peskov/trigande.jpg'
   import vatani from './assets/img/peskov/vatani.jpg'
   import zefirov_elda from './assets/img/peskov/zefirov_elda.jpg'
+  import peskov_vstavit_text from './assets/img/peskov/peskov_vstavit_text.jpg'
+  import sobak from './assets/img/peskov/sobak.jpg'
+  import _012secs from './assets/img/peskov/012secs.jpg'
+  import want_to_be from './assets/img/peskov/want_to_be.jpg'
+  import _1870_200dollars from './assets/img/peskov/1870_200dollars.jpg'
+  import life_passport_vk from './assets/img/peskov/life_passport_vk.jpg'
+  import _420 from './assets/img/peskov/420.jpg'
+  import peskov_police from './assets/img/peskov/peskov_police.jpg'
+  import tale from './assets/img/peskov/tale.jpg'
+  import fanta from './assets/img/peskov/fanta.jpg'
+  import ovulyaha from './assets/img/peskov/ovulyaha.jpg'
+  import great_peskov_dima from './assets/img/peskov/great_peskov_dima.jpg'
+  import peskov_dima_ibal_trampa_kadilom from './assets/img/peskov/peskov_dima_ibal_trampa_kadilom.jpg'
+  import _choice from './assets/img/peskov/choice.jpg'
+  import kakoi from './assets/img/peskov/kakoi.jpg'
+  import run from './assets/img/peskov/run.jpg'
+  import odmen from './assets/img/peskov/odmen.jpg'
+  import clock from './assets/img/peskov/clock.jpg'
+  import america from './assets/img/peskov/america.jpg'
+  import vibraton from './assets/img/peskov/vibraton.jpg'
   export default {
     name: "app",
     data () {
@@ -64,7 +84,27 @@
           tramp_elda,
           trigande,
           vatani,
-          zefirov_elda
+          zefirov_elda,
+          peskov_vstavit_text,
+          sobak,
+          _012secs,
+          want_to_be,
+          _1870_200dollars,
+          life_passport_vk,
+          _420,
+          peskov_police,
+          tale,
+          fanta,
+          ovulyaha,
+          great_peskov_dima,
+          peskov_dima_ibal_trampa_kadilom,
+          _choice,
+          kakoi,
+          run,
+          odmen,
+          clock,
+          america,
+          vibraton
         ]
         this.peskovUri = choice(peskov)
       }
