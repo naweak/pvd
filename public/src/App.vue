@@ -131,7 +131,9 @@
     font-size: 100%;
   }
   #peskov {
-    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
   #peskov img {
     max-width: 425px;
