@@ -139,4 +139,8 @@
   #menu {
     max-width: 1000px;
   }
+  a {
+    color: blue; /* прям как ты аъаъаъаъъа */
+    text-decoration: none;
+  }
 </style>
