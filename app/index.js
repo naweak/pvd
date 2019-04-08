@@ -8,6 +8,7 @@ const adapter = new FileSync('db.json')
 const db = lowdb(adapter)
 const shortid = require('shortid')
 const md5 = require('md5')
+const unzalgo = require('unzalgo')
 
 db.defaults({
   point: 'http://www.kursksu.ru/',
@@ -114,7 +115,17 @@ function userInfoByToken (code) {
 }
 
 function chatMessages () {
-  return db.get('chat')
+  let chat = db.get('chat').value()
+  chat.forEach((elem, index) => {
+    chat[index] = parseChatMessage(chat[index])
+  })
+  return chat
+}
+
+function parseChatMessage (message) {
+  message.raw = message.text
+  message.text = unzalgo.clean(message.text)
+  return message
 }
 
 function apiMiddleware(req, res) {
