@@ -73,7 +73,7 @@
       newRandom () {
         let addrs = []
         let delimitter = /\?/g.test(this.point) ? '&' : '?'
-        if (this.counter == 1000)
+        if (this.addrs.length == 1000)
           this.addrs = []
         for (let i=0; i < this.requestsPerPass; i++) {
           addrs.push(`${this.point}${delimitter}PVD_RULEZZ=${random()}&weAre=https://thirdwave.tk/`)
