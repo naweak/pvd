@@ -2,7 +2,11 @@ const db = require('../models/DB')
 
 class Chat {
   messages () {
-    return db.get('chat').value()
+    let messages = db.get('chat').value()
+    messages.forEach((elem, index) => {
+      delete(messages[index].ip)
+    })
+    return messages
   }
 }
 
