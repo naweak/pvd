@@ -4,19 +4,21 @@ const md5 = require('md5')
 const { arrayLast, random } = require('../lib.js')
 
 class User {
-  constructor (login = '', password = '', group = '', id = shortid.generate(), tokenCode = '') {
+  constructor (login = '', password = '', group = '', ip = '', id = shortid.generate(), tokenCode = '') {
     this.id = id
     this.login = login
     this.password = password
     this.group = group
     this.tokenCode = tokenCode
+    this.ip = ip
   }
   register () {
     db.get('users').push({
       id: this.id,
       login: this.login,
       password: md5(this.password),
-      group: this.group
+      group: this.group,
+      ip: this.ip
     }).write()
   }
   info () {

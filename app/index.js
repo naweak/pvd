@@ -9,8 +9,9 @@ app.use(bodyParser.json());
 app.use('/api', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
   let params = req.method == 'POST' ? req.body : req.query
+  let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
   try {
-    res.send(require('./methods/' + params.method).run(params))
+    res.send(require('./methods/' + params.method).run(params, ip))
   }
   catch (e) {
     console.log(e)
