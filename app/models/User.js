@@ -4,7 +4,7 @@ const md5 = require('md5')
 const { arrayLast, random } = require('../lib.js')
 
 class User {
-  constructor (login = '', password = '', group = '', id = shortid.generate()) {
+  constructor (login = '', password = '', group = '', id = shortid.generate(), tokenCode = '') {
     this.id = id
     this.login = login
     this.password = password
