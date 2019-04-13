@@ -9,6 +9,7 @@ class User {
     this.login = login
     this.password = password
     this.group = group
+    this.tokenCode = tokenCode
   }
   register () {
     db.get('users').push({
@@ -45,6 +46,12 @@ class User {
       expires: Date.now() + 604800000,
       createDate: Date.now()
     }).write()
+  }
+  infoByToken () {
+    let token = db.get('tokens').find({ code: this.tokenCode }).value()
+    if (token)
+      this.login = token.login
+    return this.info()
   }
 }
 
