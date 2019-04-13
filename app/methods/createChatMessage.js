@@ -4,7 +4,7 @@ const ChatMessage = require('../models/ChatMessage')
 const ResponseErrorNotLogged = require('../models/ResponseErrorNotLogged')
 
 module.exports = {
-  run (params) {
+  run (params, ip) {
     let user = new User()
     user.tokenCode = params.token
     console.log(user)
@@ -14,7 +14,7 @@ module.exports = {
     else if (!params.text)
       return new Response('вставить текст', 41, true)
     else {
-      let message = new ChatMessage(params.text, userInfo.login)
+      let message = new ChatMessage(params.text, userInfo.login, ip)
       message.create()
       return new Response('вставил текст')
     }
