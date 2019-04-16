@@ -144,4 +144,8 @@
     color: blue; /* прям как ты аъаъаъаъъа */
     text-decoration: none;
   }
+  blockquote {
+    color: #228b22;
+    font-style: italic;
+  }
 </style>

@@ -20,20 +20,19 @@
     </div>
     <div id="error" class="error" v-if="hasError">{{ hasError.data }}</div>
     <div id="messages" style='fullHeight ? "max-height: 350px;" : ""'>
-      <div class="message" v-for='message in messages'>
-        <div class="text" v-html='parser(message.text)'></div>
-        <div class='autograph'>
-          {{ message.author }}, {{ date(message.createDate) }}
-        </div>
-      </div>
+      <ChatMessage
+        v-for='message in messages'
+        :message='message'></ChatMessage>
     </div>
   </div>
 </template>
 
 <script>
   import $ from 'jquery'
+  import ChatMessage from './ChatMessage.vue'
   export default {
     name: 'chat',
+    components: { ChatMessage },
     data () {
       return {
         messages: [],
@@ -96,16 +95,17 @@
         clearInterval(polling)
         this.autoupdateEnabled = false
       },
-      parser (text) {
-        text = this.$markdown.render(text)
-        return text
-      },
       load () {
         this.fetchMessages()
       }
     },
     created () {
       this.load()
+      this.$root.$on('quote', (message) => {
+        let newlines = this.text.length == 0 ||
+        this.text.substr(this.text.length - 2) == '\n\n' ? '' : '\n\n'
+        this.text += newlines + message + '\n\n'
+      })
     }
   }
 </script>
