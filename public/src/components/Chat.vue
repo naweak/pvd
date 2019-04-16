@@ -19,7 +19,7 @@
       <button v-else v-on:click='enableAutoupdate()'>врубить автоапдейт</button>
     </div>
     <div id="error" class="error" v-if="hasError">{{ hasError.data }}</div>
-    <div id="messages">
+    <div id="messages" style='fullHeight ? "max-height: 350px;" : ""'>
       <div class="message" v-for='message in messages'>
         <div class="text" v-html='parser(message.text)'></div>
         <div class='autograph'>
@@ -46,6 +46,7 @@
         autoupdateEnabled: false
       }
     },
+    props: [ 'fullHeight' ],
     methods: {
       fetchMessages () {
         var that = this
@@ -116,7 +117,6 @@
     border: 1px solid black;
   }
   #messages {
-    max-height: 350px;
     overflow: auto;
   }
   #create form textarea {

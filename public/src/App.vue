@@ -4,6 +4,7 @@
     <div id="menu">
       <ul>
         <li><router-link :to='{ name: "home" }'>домик блять</router-link></li>
+        <li><router-link :to='{ name: "chat" }'>чят во весь рост</router-link></li>
         <li><a href='https://github.com/naweak/pvd' target="_blank">жидхаб</a></li>
         <li v-if='!$root.userInfo'><router-link :to='{ name: "login" }'>логин блять</router-link></li>
         <li v-if='!$root.userInfo'><router-link :to='{ name: "register" }'>рега блять</router-link></li>
