@@ -14,6 +14,9 @@
     methods: {
       parser (text) {
         text = this.$markdown.render(text)
+        this.$root.config.smileysList.forEach((elem) => {
+          text = text.replace(new RegExp(`:${elem}:`, 'ig'), `<img class='smiley' src='${this.$root.config.smileys}/${elem}.png' alt=':${elem}:' title=':${elem}:'/>`)
+        })
         return text
       },
       quote () {

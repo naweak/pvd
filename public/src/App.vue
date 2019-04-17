@@ -148,4 +148,8 @@
     color: #228b22;
     font-style: italic;
   }
+  .smiley {
+    max-width: 32px !important;
+    margin: 2px;
+  }
 </style>

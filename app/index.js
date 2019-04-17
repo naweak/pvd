@@ -19,5 +19,6 @@ app.use('/api', (req, res) => {
   }
 })
 app.use(history())
+app.use('/smileys', express.static('../public/smileys/'))
 app.use(express.static('../public/dist/'))
 app.listen(config.port, config.host, () => console.log(`Server running in ${config.host}:${config.port}`))

@@ -6,6 +6,9 @@
         <div>
           <textarea v-model='text' placeholder="вставить текст"></textarea>
         </div>
+        <div id="smileys">
+          <img v-for='smiley in smileys' v-on:click='appendText(`:${smiley}:`)' class='smiley clickable' :src="$root.config.smileys + '/' + smiley + '.png'" :alt="`:${smiley}:`" :title="`:${smiley}:`">
+        </div>
         <div>
           <button type="submit">Аыыы</button>
         </div>
@@ -30,6 +33,7 @@
 <script>
   import $ from 'jquery'
   import ChatMessage from './ChatMessage.vue'
+  import config from '../config.js'
   export default {
     name: 'chat',
     components: { ChatMessage },
@@ -42,7 +46,8 @@
         },
         hasError: false,
         text: '',
-        autoupdateEnabled: false
+        autoupdateEnabled: false,
+        smileys: config.smileysList
       }
     },
     props: [ 'fullHeight' ],
@@ -95,6 +100,9 @@
         clearInterval(polling)
         this.autoupdateEnabled = false
       },
+      appendText (text) {
+        this.text += text
+      },
       load () {
         this.fetchMessages()
       }
@@ -135,4 +143,5 @@
   .text p img {
     max-width: 700px;
   }
+  .clickable { cursor: pointer; }
 </style>
