@@ -7,6 +7,7 @@ export default {
     'hm1',          'negodue',
     'nihuya_sebe',  'no_comments',
     'no_comments1', 'nu_blyat',
-    'nutiponel',    'tam_shizik'
+    'nutiponel',    'tam_shizik',
+    'pidroas'
   ]
 }
