@@ -17,6 +17,8 @@
         this.$root.config.smileysList.forEach((elem) => {
           text = text.replace(new RegExp(`:${elem}:`, 'ig'), `<img class='smiley' src='${this.$root.config.smileys}/${elem}.png' alt=':${elem}:' title=':${elem}:'/>`)
         })
+        text = text.replace(/https:\/\/youtu.be\/(.*)<\/p>\s/i, `<iframe width="560" height="315" src="https://www.youtube.com/embed/$1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
+        text = text.replace(/https:\/\/www.youtube.com\/watch\?v=(.*)<\/p>\s/i, `<iframe width="560" height="315" src="https://www.youtube.com/embed/$1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
         return text
       },
       quote () {
