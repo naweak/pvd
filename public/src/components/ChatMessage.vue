@@ -2,7 +2,7 @@
   <div class="message">
     <div class="text" v-html='parser(message.text)'></div>
     <div class='autograph'>
-      {{ message.author }}, {{ date(message.createDate) }}, <a href="javascript:void(0)" v-on:click="quote()">цитировать</a>
+      {{ message.author }}, {{ date(message.createDate) }}<span v-if="$root.userInfo">, <a href="javascript:void(0)" v-on:click="quote()">цитировать</a></span>
     </div>
   </div>
 </template>
