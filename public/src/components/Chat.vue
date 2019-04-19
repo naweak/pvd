@@ -22,7 +22,7 @@
       <button v-else v-on:click='enableAutoupdate()'>врубить автоапдейт</button>
     </div>
     <div id="error" class="error" v-if="hasError">{{ hasError.data }}</div>
-    <div id="messages" style='fullHeight ? "max-height: 350px;" : ""'>
+    <div id="messages" :style='!fullHeight ? "max-height: 350px;" : ""'>
       <ChatMessage
         v-for='message in messages'
         :message='message'></ChatMessage>
