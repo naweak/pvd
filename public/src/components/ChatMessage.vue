@@ -1,8 +1,10 @@
 <template>
-  <div class="message">
-    <div class="text" v-html='parser(message.text)'></div>
-    <div class='autograph'>
-      {{ message.author }}, {{ date(message.createDate) }}<span v-if="$root.userInfo">, <a href="javascript:void(0)" v-on:click="quote()">цитировать</a></span>
+  <div class="message card">
+    <div class="card-body">
+      <div class="text" v-html='parser(message.text)'></div>
+      <div class='autograph'>
+        {{ message.author }}, {{ date(message.createDate) }}<span v-if="$root.userInfo">, <a href="javascript:void(0)" v-on:click="quote()">цитировать</a></span>
+      </div>
     </div>
   </div>
 </template>
@@ -29,3 +31,9 @@
     }
   }
 </script>
+
+<style>
+  .message {
+    margin: 10px;
+  }
+</style>

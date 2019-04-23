@@ -1,20 +1,44 @@
 <template>
   <div id="register">
+    <h2>Рега</h2>
     <form v-on:submit.prevent='reg()'>
-      <div>
-        <label>логин: <input type="text" v-model='login'></label>
+      <div class="login form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              логин
+            </div>
+          </div>
+          <input type="text" v-model='login' class="form-control">
+        </div>
       </div>
       <div>
-        <label>пароль: <input type="password" v-model='password'></label>
+        <div class="password form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                пароль
+              </div>
+            </div>
+            <input type="password" v-model='password' class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="passwordVerify form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              подтвердитьпароль
+            </div>
+          </div>
+          <input type="password" v-model='passwordVerify' class="form-control">
+        </div>
       </div>
       <div>
-        <label>подтвердитьпароль: <input type="password" v-model='passwordVerify'></label>
-      </div>
-      <div>
-        <button type=submit>что делать то блядь</button>
+        <button type=submit class="btn btn-primary">что делать то блядь</button>
       </div>
     </form>
-    <div id='error' class=error v-if='hasError'>{{ hasError.data }}</div>
+    <div id='error' class='error alert alert-danger' v-if='hasError'>{{ hasError.data }}</div>
   </div>
 </template>
 

@@ -1,31 +1,31 @@
 <template>
-  <div id="chat">
-    <h2>Говночат наху</h2>
-    <div id="create" v-if='$root.userInfo'>
-      <form v-on:submit.prevent='createChatMessage()'>
-        <div>
-          <textarea v-model='text' placeholder="вставить текст"></textarea>
-        </div>
-        <div id="smileys">
-          <img v-for='smiley in smileys' v-on:click='appendText(`:${smiley}:`)' class='smiley clickable' :src="$root.config.smileys + '/' + smiley + '.png'" :alt="`:${smiley}:`" :title="`:${smiley}:`">
-        </div>
-        <div>
-          <button type="submit">Аыыы</button>
-        </div>
-      </form>
-    </div>
-    <div v-else>
-      <router-link :to="{ name: 'login' }">войдите</router-link> чотбы срать в чятик
-    </div>
-    <div>
-      <button v-if='autoupdateEnabled' v-on:click='disableAutoupdate()'>вырубить автоапдейт</button>
-      <button v-else v-on:click='enableAutoupdate()'>врубить автоапдейт</button>
-    </div>
-    <div id="error" class="error" v-if="hasError">{{ hasError.data }}</div>
-    <div id="messages" :style='!fullHeight ? "max-height: 350px;" : ""'>
-      <ChatMessage
-        v-for='message in messages'
-        :message='message'></ChatMessage>
+  <div id="chat" class="card">
+    <div class="card-body">
+      <h2>Говночат наху</h2>
+      <div id="create" v-if='$root.userInfo'>
+        <form v-on:submit.prevent='createChatMessage()'>
+          <div class="form-group">
+            <textarea class="form-control" v-model='text' placeholder="вставить текст"></textarea>
+          </div>
+          <div id="smileys">
+            <img v-for='smiley in smileys' v-on:click='appendText(`:${smiley}:`)' class='smiley clickable' :src="$root.config.smileys + '/' + smiley + '.png'" :alt="`:${smiley}:`" :title="`:${smiley}:`">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-sm">Аыыы</button>
+            <button type="button" class="btn btn-danger btn-sm" v-if='autoupdateEnabled' v-on:click='disableAutoupdate()'>вырубить автоапдейт</button>
+            <button type="button" class="btn btn-success btn-sm" v-else v-on:click='enableAutoupdate()'>врубить автоапдейт</button>
+          </div>
+        </form>
+      </div>
+      <div v-else>
+        <router-link :to="{ name: 'login' }">войдите</router-link> чотбы срать в чятик
+      </div>
+      <div id="error" class="error alert alert-danger" v-if="hasError">{{ hasError.data }}</div>
+      <div id="messages" :style='!fullHeight ? "max-height: 350px;" : ""'>
+        <ChatMessage
+          v-for='message in messages'
+          :message='message'></ChatMessage>
+      </div>
     </div>
   </div>
 </template>
@@ -120,28 +120,17 @@
 
 <style>
   #chat {
-    padding: 10px;
-    margin: 15px;
-    border: 1px solid black;
+    margin: 10px;
   }
   #messages {
     overflow: auto;
-  }
-  #create form textarea {
-    width: 100%;
-    height: 90px;
-  }
-  .message {
-    padding: 5px;
-    margin: 10px;
-    border: 1px solid black;
   }
   .text, .autograph {
     margin-top: 5px;
     margin-bottom: 5px;
   }
   .text p img {
-    max-width: 700px;
+    max-width: 100%;
   }
   .clickable { cursor: pointer; }
 </style>

@@ -1,12 +1,31 @@
 <template>
   <div id="login">
-    <div id="error" class='error' v-if='hasError'>
+    <h2>Логин</h2>
+    <div id="error" class='error alert alert-danger' v-if='hasError'>
       {{ hasError.data }}
     </div>
     <form v-on:submit.prevent='doLogin()'>
-      <div><label>Логин: <input type="text" id='login' v-model='login'></label></div>
-      <div><label>Пароль: <input type="password" id='password' v-model='password'></label></div>
-      <div><button type="submit">ъъъъъ</button></div>
+      <div class="login form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              Логин
+            </div>
+          </div>
+          <input type="text" class="form-control" v-model='login'>
+        </div>
+      </div>
+      <div class="password form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              Пароль
+            </div>
+          </div>
+          <input type="password" v-model='password' class="form-control">
+        </div>
+      </div>
+      <div><button type="submit" class="btn btn-primary">ъъъъъ</button></div>
     </form>
   </div>
 </template>

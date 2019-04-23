@@ -14,6 +14,10 @@ const markdownPlugin = {
   }
 }
 Vue.use(markdownPlugin)
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap-grid.css'
+import 'bootstrap/dist/css/bootstrap-reboot.css'
 
 Vue.config.productionTip = false
 

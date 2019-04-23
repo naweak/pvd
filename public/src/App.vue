@@ -1,21 +1,29 @@
 <template>
   <div id="app">
-    <h2 style='max-width: 1000px'>{{ title }}</h2>
-    <div id="menu">
-      <ul>
-        <li><router-link :to='{ name: "home" }'>домик блять</router-link></li>
-        <li><router-link :to='{ name: "chat" }'>чят во весь рост</router-link></li>
-        <li><a href='https://github.com/naweak/pvd' target="_blank">жидхаб</a></li>
-        <li v-if='!$root.userInfo'><router-link :to='{ name: "login" }'>логин блять</router-link></li>
-        <li v-if='!$root.userInfo'><router-link :to='{ name: "register" }'>рега блять</router-link></li>
-        <li v-if='$root.userInfo'><a href='javascript:void(0)' v-on:click='logout()'>логаут наху</a></li>
-      </ul>
-    </div>
-    <div id="peskov">
-      <img v-on:click="randomPeskov()" :src="peskovUri" alt="peskov">
-    </div>
-    <div style='max-width: 1000px'>
-      <router-view/>
+    <vue-progress-bar></vue-progress-bar>
+    <div class="container-fluid">
+      <h1>Песков взрывает дома</h1>
+      <div class="row">
+        <ul class="col-md-2 nav flex-column">
+          <li class="nav-item" v-for="item in menu.all">
+            <router-link class="nav-link" :to="item.link" v-html="item.text"></router-link>
+          </li>
+          <li class="nav-item" v-if="$root.userInfo" v-for="item in menu.logged">
+            <router-link class="nav-link" :to="item.link" v-html="item.text"></router-link>
+          </li>
+          <li class="nav-item" v-else v-for="item in menu.notLogged">
+            <router-link class="nav-link" :to="item.link" v-html="item.text"></router-link>
+          </li>
+        </ul>
+        <div class="col-md-6">
+          <transition name="slide-fade">
+            <router-view></router-view>
+          </transition>
+        </div>
+        <div class="col-md-2" id="peskov">
+          <img :src="peskovUri" class="img-fluid img-thumbnail" :alt="peskov" v-on:click="randomPeskov()">
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -59,12 +67,40 @@
   import clock from './assets/img/peskov/clock.jpg'
   import america from './assets/img/peskov/america.jpg'
   import vibraton from './assets/img/peskov/vibraton.jpg'
+  import Vue from 'vue'
+  import VueProgressBar from 'vue-progressbar'
+  Vue.use(VueProgressBar, {
+    color: '#33cccc',
+    failedColor: '#cc3333',
+    thickness: '2px',
+    transition: {
+      speed: '0.2s',
+      opacity: '0.6s',
+      termination: 300
+    },
+    autoRevert: true,
+    location: 'top',
+    inverse: false
+  })
   export default {
     name: "app",
     data () {
       return {
         title: "Песков взрывает дома",
-        peskovUri: ''
+        peskovUri: '',
+        menu: {
+          all: [
+            { link: '/', text: 'домик блять' },
+            { link: '/chat', text: 'чят во весь рост' }
+          ],
+          notLogged: [
+            { link: '/login', text: 'логин блять' },
+            { link: '/register', text: 'рега блять' },
+          ],
+          logged: [
+            { link: '/logout', text: 'логаут наху' }
+          ]
+        }
       }
     },
     methods: {
@@ -112,44 +148,39 @@
     },
     created () {
       this.randomPeskov()
+      this.$Progress.start()
       this.$router.beforeEach((to, from, next) => {
         this.randomPeskov()
+        if (to.meta.progress !== undefined) {
+          let meta = to.meta.progress
+          this.$Progress.parseMeta(meta)
+        }
+        this.$Progress.start()
         next()
+      })
+      this.$router.afterEach((to, from) => {
+        this.$Progress.finish()
       })
     }
   }
 </script>
 
 <style>
-  .error {
-    color: red;
-  }
-  #app {
-    font-family: arial, sans-serif;
-  }
-  button {
-    font-family: arial, sans-serif;
-    font-size: 100%;
-  }
-  #peskov {
-    float: right;
-  }
   #peskov img {
-    max-width: 425px;
-  }
-  #menu {
-    max-width: 1000px;
-  }
-  a {
-    color: blue; /* прям как ты аъаъаъаъъа */
-    text-decoration: none;
-  }
-  blockquote {
-    color: #228b22;
-    font-style: italic;
+    max-width: 100%;
   }
   .smiley {
     max-width: 32px !important;
-    margin: 2px;
+    margin: 3px;
+  }
+  button {
+    margin: 10px !important;
+  }
+  .slide-fade-enter-active {
+    transition: all .2s ease;
+  }
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateY(-10px);
+    opacity: 0;
   }
 </style>
