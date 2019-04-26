@@ -2,6 +2,7 @@ const shortid = require('shortid')
 const db = require('./DB')
 const md5 = require('md5')
 const { arrayLast, random } = require('../lib.js')
+const { chatDelay } = require('../config')
 
 class User {
   constructor (login = '', password = '', group = '', ip = '', id = shortid.generate(), tokenCode = '') {
@@ -54,6 +55,21 @@ class User {
     if (token)
       this.login = token.login
     return this.info()
+  }
+  lastChatMessage () {
+    return db.get('chat')
+      .filter({ author: this.login })
+      .orderBy('createDate', 'desc')
+      .value()[0]
+  }
+  canPostWithoutDelay() {
+    return db.get('users').find({ login: this.login }).value().canPostWithoutDelay
+  }
+  chatDelayExpired () {
+    return this.lastChatMessage().createDate + chatDelay < Date.now() || this.canPostWithoutDelay()
+  }
+  chatDelayRemainingTime() {
+    return (this.lastChatMessage().createDate + chatDelay - Date.now()) / 1000
   }
 }
 
