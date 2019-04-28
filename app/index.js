@@ -1,24 +1,13 @@
-const express = require('express')
 const history = require('connect-history-api-fallback')
-const app = express()
-const bodyParser = require('body-parser')
+const { static } = require('express')
 const config = require('./config')
-const Response = require('./models/Response')
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use('/api', (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*')
-  let params = req.method == 'POST' ? req.body : req.query
-  let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-  try {
-    res.send(require('./methods/' + params.method).run(params, ip))
-  }
-  catch (e) {
-    console.log(e)
-    res.send(new Response('Метод не существует', 11, true))
-  }
+const Framework = require('@naweak/n')
+const app = new Framework({
+  methodsDir: __dirname + '/methods/',
+  host: config.host,
+  port: config.port
 })
-app.use(history())
-app.use('/smileys', express.static('../public/smileys/'))
-app.use(express.static('../public/dist/'))
-app.listen(config.port, config.host, () => console.log(`Server running in ${config.host}:${config.port}`))
+app.app.use(history())
+app.app.use('/smileys', static('../public/smileys/'))
+app.app.use(static('../public/dist/'))
+app.runServer()
