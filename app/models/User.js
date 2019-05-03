@@ -66,7 +66,7 @@ class User {
     return db.get('users').find({ login: this.login }).value().canPostWithoutDelay
   }
   chatDelayExpired () {
-    return this.lastChatMessage().createDate + chatDelay < Date.now() || this.canPostWithoutDelay()
+    return !this.lastChatMessage() || this.lastChatMessage().createDate + chatDelay < Date.now() || this.canPostWithoutDelay()
   }
   chatDelayRemainingTime() {
     return (this.lastChatMessage().createDate + chatDelay - Date.now()) / 1000
