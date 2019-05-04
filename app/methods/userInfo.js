@@ -7,6 +7,8 @@ module.exports = {
     let user = new User()
     user.tokenCode = params.token
     let userInfo = user.infoByToken()
+    delete userInfo.password
+    delete userInfo.ip
     if (!userInfo)
       return new ResponseErrorNotLogged()
     else
